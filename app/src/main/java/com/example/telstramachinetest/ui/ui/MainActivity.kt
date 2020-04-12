@@ -21,11 +21,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         progressBar.visibility = ProgressBar.VISIBLE
-
-        var listRowsItem = ArrayList<RowsItem>()
-
-
-
         val api = NewsApi()
         val db = NewsDatabase(this)
         val newsRepository = NewsRepository(api, db)
@@ -36,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.saveNews()
 
         val recyclerView = findViewById(R.id.recycler_view) as RecyclerView
-        val linearLayout : LinearLayoutManager = LinearLayoutManager(this)
+        val linearLayout: LinearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayout
         val adapter = NewsAdapter(context = this)
         recycler_view.adapter = adapter
@@ -44,8 +39,6 @@ class MainActivity : AppCompatActivity() {
 
             it?.let {
                 title_text.text = it.title
-                listRowsItem = it.rows!! as ArrayList<RowsItem>
-
                 it.rows?.let {
 
                     adapter.setList(it as ArrayList<RowsItem>)
